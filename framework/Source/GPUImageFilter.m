@@ -224,7 +224,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size)
         }
         
         
-        CGColorSpaceRef defaultRGBColorSpace = CGColorSpaceCreateDeviceRGB();
+        CGColorSpaceRef defaultRGBColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
         
         if ([GPUImageContext supportsFastTextureUpload] && preparedToCaptureImage)
         {

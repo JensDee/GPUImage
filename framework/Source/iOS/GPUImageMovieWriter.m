@@ -392,7 +392,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         previousAudioTime = currentSampleTime;
         
 //        NSLog(@"Recorded audio sample time: %lld, %d, %lld", currentSampleTime.value, currentSampleTime.timescale, currentSampleTime.epoch);
-        void(^write)() = ^() {
+        void(^write)(void) = ^(void) {
             while( ! assetWriterAudioInput.readyForMoreMediaData && ! _encodingLiveVideo && ! audioEncodingIsFinished ) {
                 NSDate *maxDate = [NSDate dateWithTimeIntervalSinceNow:0.5];
                 //NSLog(@"audio waiting...");
@@ -693,7 +693,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         }
     }
 
-    void(^write)() = ^() {
+    void(^write)(void) = ^(void) {
         while( ! assetWriterVideoInput.readyForMoreMediaData && ! _encodingLiveVideo && ! videoEncodingIsFinished ) {
             NSDate *maxDate = [NSDate dateWithTimeIntervalSinceNow:0.1];
             //NSLog(@"video waiting...");
@@ -816,7 +816,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         }
         else if (audioOutputSettings == nil)
         {
-            double preferredHardwareSampleRate = [[AVAudioSession sharedInstance] currentHardwareSampleRate];
+            double preferredHardwareSampleRate = [[AVAudioSession sharedInstance] sampleRate];
             
             AudioChannelLayout acl;
             bzero( &acl, sizeof(acl));
